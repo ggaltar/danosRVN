@@ -200,7 +200,6 @@ server <- function(input, output, session) {
   output$mapa <- renderLeaflet({
     registros <- filtrarDanos()
     
-    lista_colores <- c("#94d2bd","#94d2bd","#ee9b00","#ca6702","#bb3e03","#ae2012","#9b2226","#ef476f","#ffd166","#06d6a0","#118ab2","#073b4c","#495057")
     
     # Registro de daños, zonas de conservación y ráster de zonas de conservación por cantidad
     leaflet() %>%
