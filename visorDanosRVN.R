@@ -148,7 +148,7 @@ server <- function(input, output, session) {
     # Remoción de geometrías y selección de columnas
     danos_filtrado <-
       danos %>%
-      dplyr::select(estructura, elemento, dano, severidad, servicio, ruta, seccion, zona, disparador, fecha, observaciones, usuario, fecha_reporte, fotos)
+      dplyr::select(id, estructura, elemento, dano, severidad, servicio, ruta, seccion, zona, disparador, fecha, observaciones, usuario, fecha_reporte, fotos)
     
     # Filtrado de daños por estructura
     if (input$estructura != "Todas") {
@@ -236,6 +236,8 @@ server <- function(input, output, session) {
         fillOpacity = 1,
         group = "Daños",
         label = paste0(
+          "Id: ", registros$id,
+          ", ",
           "Estructura: ", registros$estructura,
           ", ",
           "Elemento: ", registros$elemento,
@@ -243,6 +245,8 @@ server <- function(input, output, session) {
           "Daño: ", registros$dano
         ),
         popup = (paste0(
+          "<strong>Id: </strong>", registros$id,
+          "<br>",
           "<strong>Estructura: </strong>", registros$estructura,
           "<br>",
           "<strong>Elemento: </strong>", registros$elemento,
@@ -291,11 +295,11 @@ server <- function(input, output, session) {
   output$tabla <- renderDT({
     registros <- filtrarDanos()
     registros %>%
-      dplyr::select(estructura,elemento, dano, severidad, servicio, fecha, ruta, seccion) %>%
+      dplyr::select(id, estructura,elemento, dano, severidad, servicio, fecha, ruta, seccion) %>%
       st_drop_geometry() %>%
       
       datatable(rownames = FALSE,
-                colnames = c('Estructura','Elemento', 'Daño', 'Severidad','Servicio', 'Fecha', 'Ruta', 'Sección'),
+                colnames = c('Id', 'Estructura','Elemento', 'Daño', 'Severidad','Servicio', 'Fecha', 'Ruta', 'Sección'),
                 options = list(
                   pageLength = 7,
                   language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
