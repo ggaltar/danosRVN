@@ -129,22 +129,15 @@ ui <- dashboardPage(
     box(
       title = "Mapa de ubicación de daños",
       leafletOutput(outputId = "mapa"),
-      width = 7
+      width = 12
     ),
-    box(
-      title = "Registros de daños",
-      DTOutput(outputId = "tabla"),
-      width = 5
-    ),      
   ),    
   fluidRow(
     box(
-      title = "Elementos dañados",
-      plotOutput(outputId = "grafico"),
-      width = 12,
-      collapsible = TRUE,
-      collapsed = F,
-    )
+      title = "Registros de daños",
+      DTOutput(outputId = "tabla"),
+      width = 12
+    ),
   ))
 )
 
@@ -277,7 +270,7 @@ server <- function(input, output, session) {
           "<br>",
           "<strong>Fecha del reporte (año-mes-día): </strong>", registros$fecha_reporte,
           "<br>",
-          "<strong>Fotos: </strong><a>", registros$fotos,"</a>",
+          "<strong>Fotos: </strong><br><a>", registros$fotos,"</a>",
           "<br>"
         )
       )  %>%
@@ -299,44 +292,17 @@ server <- function(input, output, session) {
   output$tabla <- renderDT({
     registros <- filtrarDanos()
     registros %>%
-      dplyr::select(estructura,elemento, dano, severidad, servicio) %>%
+      dplyr::select(estructura,elemento, dano, severidad, servicio, fecha, ruta, seccion) %>%
       st_drop_geometry() %>%
       
       datatable(rownames = FALSE,
-                colnames = c('Estructura','Elemento', 'Daño', 'Severidad','Servicio'),
+                colnames = c('Estructura','Elemento', 'Daño', 'Severidad','Servicio', 'Fecha', 'Ruta', 'Sección'),
                 options = list(
                   pageLength = 7,
                   language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
                 )
       )
   })
-  
-  # Gráfico de principales elementos dañados
-  
-  
-  output$grafico <- renderPlot({
-    # Preparación de los datos
-    registros <- filtrarDanos()
-    elementos <-
-      registros %>%
-      st_drop_geometry() %>%
-      select(elemento) %>%
-      rename(Elemento = elemento) %>%
-      group_by(Elemento) %>%
-      summarise(suma = n())
-    
-    
-    ggplot(elementos, aes(x = reorder(Elemento, -suma),y = suma)) +
-      geom_col(colour = "#357ca5", fill = "#357ca5",width = 0.5) +
-      geom_text(aes(label = suma), vjust = 1.2, colour = "black") +
-      theme(plot.title = element_text(hjust = 0.5),
-            axis.text.x = element_text(angle = 25,hjust = 1, vjust = 1, size = 14)
-      ) +
-      xlab("") +
-      ylab("Cantidad")
-    
-  })  
-  
 }
 
 shinyApp(ui, server)
