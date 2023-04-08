@@ -243,7 +243,7 @@ server <- function(input, output, session) {
           ", ",
           "Daño: ", registros$dano
         ),
-        popup = paste0(
+        popup = (paste0(
           "<strong>Estructura: </strong>", registros$estructura,
           "<br>",
           "<strong>Elemento: </strong>", registros$elemento,
@@ -270,8 +270,8 @@ server <- function(input, output, session) {
           "<br>",
           "<strong>Fecha del reporte (año-mes-día): </strong>", registros$fecha_reporte,
           "<br>",
-          "<strong>Fotos: </strong><br><a>", registros$fotos,"</a>",
-          "<br>"
+          "<strong>Fotos:</strong><br><a>", registros$fotos,"</a>",
+          "<br>")
         )
       )  %>%
       
