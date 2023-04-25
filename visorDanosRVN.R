@@ -236,7 +236,7 @@ server <- function(input, output, session) {
         fillOpacity = 1,
         group = "Daños",
         label = paste0(
-          "Id: ", registros$id,
+          "ID: ", registros$id,
           ", ",
           "Estructura: ", registros$estructura,
           ", ",
@@ -245,7 +245,7 @@ server <- function(input, output, session) {
           "Daño: ", registros$dano
         ),
         popup = (paste0(
-          "<strong>Id: </strong>", registros$id,
+          "<strong>ID: </strong>", registros$id,
           "<br>",
           "<strong>Estructura: </strong>", registros$estructura,
           "<br>",
@@ -299,7 +299,7 @@ server <- function(input, output, session) {
       st_drop_geometry() %>%
       
       datatable(rownames = FALSE,
-                colnames = c('Id', 'Estructura','Elemento', 'Daño', 'Severidad','Servicio', 'Fecha', 'Ruta', 'Sección'),
+                colnames = c('ID', 'Estructura','Elemento', 'Daño', 'Severidad','Servicio', 'Fecha', 'Ruta', 'Sección'),
                 options = list(
                   pageLength = 7,
                   language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
