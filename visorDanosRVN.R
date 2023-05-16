@@ -116,7 +116,7 @@ ui <- dashboardPage(
       ),
       dateRangeInput(
         inputId = "fecha",
-        label = "Fecha",
+        label = "Fecha del evento",
         start = "2023-01-01",
         end   = Sys.Date(),
         separator = " a ",
