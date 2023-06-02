@@ -20,14 +20,14 @@ library(shinydashboard)
 # Capa de polígonos: zonas de conservación vial
 zonas <-
   st_read(
-    "https://raw.githubusercontent.com/ggaltar/danos_red_vial/main/capas/zonas_conservacion_wgs84.geojson",
+    "zonas_conservacion_wgs84.geojson",
     quiet = TRUE
   )
 
 # Capa de líneas: red vial nacional
 rutas <-
   st_read(
-    "https://raw.githubusercontent.com/ggaltar/danos_red_vial/main/capas/red_vial_nacional_wgs84.geojson",
+    "red_vial_nacional_wgs84.geojson",
     quiet = TRUE
   ) 
 

@@ -5,9 +5,9 @@ account: gabriel-corrales
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8794714
-bundleId: 7224797
+bundleId: 7298865
 url: https://gabriel-corrales.shinyapps.io/danosRVN/
-when: 1684247211.82219
-lastSyncTime: 1684247211.82219
+when: 1685747495.46727
+lastSyncTime: 1685747495.46727
 asMultiple: FALSE
 asStatic: FALSE
